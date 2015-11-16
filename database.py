@@ -319,7 +319,7 @@ class Database(object):
         species: species which will be inserted
         node:    vamdc-node / type: instance(nodes.node)
         update:  if True then all entries in the local database with the same
-                 species-id will be deleted before the insert is performed.
+        species-id will be deleted before the insert is performed.
         """
 
         # create a list of names. New names have not to be in that list
@@ -822,11 +822,9 @@ class Database(object):
     def getvibstatelabel(self, upper_state, lower_state):
         """
         create a vibrational state label for a transition
-        in:
-           upper_state = state instance of the upper state
-           lower_state = state instance of the lower state
-        returns:
-          string = vibrational label for the transition
+        :ivar upper_state: = state instance of the upper state
+        :ivar lower_state: = state instance of the lower state
+        returns: string = vibrational label for the transition
         """
 
         # Get string which identifies the vibrational states involved in the transition
