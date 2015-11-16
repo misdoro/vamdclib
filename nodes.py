@@ -6,10 +6,10 @@ nodes.
 """
 
 try:
-    from registry import *
+    from registry import getNodeList
 except:
     print "Suds package not available. Load Vamdc-Nodes from static file"
-    from local_registry import *
+    from local_registry import getNodeList
 import query as q
 import request as r
         
@@ -66,7 +66,10 @@ class Nodelist(object):
            return nodes_match[0]
         else:
            return nodes_match
-         
+        
+    def __iter__(self):
+        return self.nodes.__iter__()
+
  
 class Node(object):
     """
