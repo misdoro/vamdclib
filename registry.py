@@ -7,14 +7,13 @@ routines for querying the registry
 """
 from settings import *
 
-REL_REG='http://registry.vamdc.eu/vamdc_registry/services/RegistryQueryv1_0'
-DEV_REG='http://casx019-zone1.ast.cam.ac.uk/registry/services/RegistryQueryv1_0'
-REL_REG='http://registry.vamdc.eu/registry-12.07/services/RegistryQueryv1_0'
+REG_DEV='http://casx019-zone1.ast.cam.ac.uk/registry/services/RegistryQueryv1_0'
+REG_REL='http://registry.vamdc.eu/registry-12.07/services/RegistryQueryv1_0'
 # use registry defined in settings if defined
 try:
   WSDL = REGURL + '?wsdl'
 except:
-  REGURL = REL_REG
+  REGURL = REG_REL
   WSDL = REGURL+'?wsdl'
 
 from suds.client import Client
