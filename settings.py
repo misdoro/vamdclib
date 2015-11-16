@@ -10,5 +10,6 @@ REGURL='http://registry.vamdc.eu/registry-12.07/services/RegistryQueryv1_0'
 #DATABASE_FILE = "/var/www/static/cdms/cdms_lite/cdms_lite.db"
 
 #DATABASE_FILE = "/var/www/static/cdms/cdms_lite/cdms_lite_private.db"
+DATABASE_FILE = "db.sqlite"
 # Timeout for queries
 TIMEOUT = 30
