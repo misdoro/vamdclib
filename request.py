@@ -62,16 +62,14 @@ class Request(object):
 
         if type(node) == nodes.Node:
             self.node = node
-            
-            if not hasattr(self.node,'url') or len(self.node.url)==0:
-#                print "Warning: Url of this node is empty!"
-                pass
-            else:
-                self.baseurl = self.node.url
-                if self.baseurl[-1]=='/':
-                    self.baseurl+='sync?'
-                else:
-                    self.baseurl+='/sync?'
+        else:
+	    raise ValueError ("node variable should be an instance of nodes.Node")
+	    
+        if not hasattr(self.node,'url') or len(self.node.url)==0:
+	    raise ValueError ("Empty url attribute of the node "+node.identifier)   
+        else:
+	    self.setbaseurl(node.url)
+                 
 
     def setbaseurl(self, baseurl):
         """
@@ -79,11 +77,12 @@ class Request(object):
         is only called if requests shall be sent to nodes which are not registered in the VAMDC registry.
         
         """
-        self.baseurl = baseurl
-        if self.baseurl[-1]=='/':
-            self.baseurl+='sync?'
+        
+        if baseurl[-1]=='/':
+            self.baseurl=baseurl+'sync?'
         else:
-            self.baseurl+='/sync?'
+            self.baseurl=baseurl+'/sync?'
+            
 
     def setquery(self, query):
         """
