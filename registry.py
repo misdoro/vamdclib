@@ -18,6 +18,7 @@ except:
 
 from suds.client import Client
 from suds.xsd.doctor import Doctor
+
 class RegistryDoctor(Doctor):
     TNS = 'http://www.ivoa.net/wsdl/RegistrySearch/v1.0'
     def examine(self, node):
@@ -47,7 +48,12 @@ def getNodeList():
    where $x/capability[@standardID='ivo://vamdc/std/VAMDC-TAP']
    and $x/@status='active'
    and $x/capability[@standardID='ivo://vamdc/std/VAMDC-TAP']/versionOfStandards='12.07'
-   return  <node><title>{$x/title/text()}</title><url>{$x/capability[@standardID='ivo://vamdc/std/VAMDC-TAP']/interface/accessURL/text()}</url><identifier>{$x/identifier/text()}</identifier></node>   
+   return 
+   <node><title>{$x/title/text()}</title>
+   <url>{$x/capability[@standardID='ivo://vamdc/std/VAMDC-TAP']/interface/accessURL/text()}</url>
+   <identifier>{$x/identifier/text()}</identifier>
+   <maintainer>{$x/curation/contact/email/text()}</maintainer>
+   </node>   
 }
 </nodes>"""
 
@@ -61,10 +67,16 @@ def getNodeList():
         except:
             url = None
             
+        try:
+	    email = node.maintainer
+	except:
+	    email = "Email not set in the registry"
+            
         nameurls.append({\
             'name':node.title,
             'url':url,
             'identifier':node.identifier,
+            'maintainer':email
             })
     return nameurls
 

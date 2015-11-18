@@ -26,7 +26,7 @@ class Nodelist(object):
         """
         self.nodes = []
         for node in getNodeList():
-            self.nodes.append(Node(node['name'], url=node['url'], identifier = node['identifier']))
+            self.nodes.append(Node(node['name'], url=node['url'], identifier = node['identifier'], email=node['maintainer']))
 
     def __repr__(self):
         """
@@ -80,10 +80,11 @@ class Node(object):
     :ivar url: Url of the VAMDC node 
     :ivar identifier: IVO-Identifier of the Node
     """
-    def __init__(self, name, url=None, identifier = None):
+    def __init__(self, name, url=None, identifier = None, email = None):
         self.name=name
         self.url=url
         self.identifier = identifier
+        self.maintainer = email
 
     def __repr__(self):
         """
