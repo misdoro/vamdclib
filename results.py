@@ -12,7 +12,7 @@ except ImportError:
  
 from xml.etree import ElementTree
 import urllib2
-from specmodel import *
+from specmodel import populate_models
 import query as q
 
 from urlparse import urlparse
@@ -26,11 +26,10 @@ class Result(object):
     """
     An Result instance contains the data returned by querying a VAMDC database node (XSAMS - Document).
 
-   :ivar Source: Source
    :ivar Xml: XSAMS - Document (XML) as string as it is returned by the node. 
    :ivar root: XSAMS document in an objectified structure (lxml.objectify)
     """
-    def __init__(self, xml=None, source=None):
+    def __init__(self, xml=None):
         """
         Result instances contain the data returned by a request send to a VAMDC node (XSAMS-Document) and provide
         methods to process this data in various ways (Validation, Parse the data and store it in table-like objects) 
@@ -38,12 +37,9 @@ class Result(object):
         :param str xml: XSAMS-String of the document
         :param str source: ???
         """
-        self.Source = source
         self.Xml = xml
         
-        #if self.Xml is None:
-        #    self.get_xml(self.Source)
-
+        
     def objectify(self):
         """
         Parses the XML string and generates an objectified structure of the document, which
@@ -69,6 +65,13 @@ class Result(object):
         except Exception, e:
             print "Objectify error: %s " % e
 
+    
+    def load_file(self,filename):
+        f=open(filename, 'r')
+    
+        self.Xml=f.read()
+        self.populate_model()
+        
     
     def populate_model(self):
         """

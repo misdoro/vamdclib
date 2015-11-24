@@ -153,10 +153,9 @@ class Request(object):
                 result = None
         else:
             if res.status == 200:
-                self.xml = res.read()
-
-                result = r.Result()
-                result.Xml = self.xml
+                #self.xml = res.read()
+                result = r.Result(res.read())
+                #result.Xml = self.xml
                 result.populate_model()
             elif res.status == 400 and HttpMethod == 'POST':
                 # Try to use http-method: GET
