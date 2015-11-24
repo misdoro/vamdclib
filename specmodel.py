@@ -407,7 +407,7 @@ DICT_MODELS = {
         {'Name':'Atom',
          'Dictionary':ATOMS_DICT,
          'init_functions':None,
-         'representation_fields':('SpeciesID', 'ChemicalElementSymbol', 'ChemicalElementNuclearCharge', 'InChIKey'),
+         'representation_fields':('SpeciesID', 'ChemicalElementSymbol', 'ChemicalElementNuclearCharge', 'IonCharge', 'InChIKey'),
          },
         {'Name':'Molecule',
          'Dictionary':MOLECULES_DICT,
